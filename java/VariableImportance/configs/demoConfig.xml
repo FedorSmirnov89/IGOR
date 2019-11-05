@@ -1,0 +1,39 @@
+<configuration>
+  <module class="modules.VarOrderDynamicModule">
+    <property name="genotypeType">MIXED</property>
+    <property name="importanceMemory">true</property>
+    <property name="importanceThreshold">0.001</property>
+    <property name="importanceUpdatePeriod">5</property>
+    <property name="maximalSampleNumber">1000</property>
+    <property name="pathToPythonDirectory">/scratch-local/smirnov/gitLabRepos/idea/python/importanceRead</property>
+  </module>
+  <module class="net.sf.opendse.encoding.module.OptimizationNewModule">
+    <property name="removeCyclesManually">false</property>
+    <property name="routingEncoding">FLOW</property>
+    <property name="stagnationRestartEnabled">true</property>
+    <property name="maximalNumberStagnatingGenerations">20</property>
+    <property name="useModularEncoding">true</property>
+    <property name="usePreprocessing">true</property>
+    <property name="useVariableOrder">true</property>
+  </module>
+  <module class="net.sf.opendse.optimization.evaluator.SumEvaluatorModule">
+    <property name="sum">costs</property>
+    <property name="type">MIN</property>
+    <property name="priority">0</property>
+  </module>
+  <module class="net.sf.opendse.optimization.io.InputModule">
+    <property name="filename">input/Specification3.xml</property>
+  </module>
+  <module class="org.opt4j.optimizers.ea.EvolutionaryAlgorithmModule">
+    <property name="generations">1000</property>
+    <property name="alpha">100</property>
+    <property name="mu">25</property>
+    <property name="lambda">25</property>
+    <property name="crossoverRate">0.95</property>
+  </module>
+  <module class="org.opt4j.viewer.ViewerModule">
+    <property name="closeEvent">STOP</property>
+    <property name="closeOnStop">false</property>
+    <property name="title">Opt4J v3.2-30-g513d2c0-SNAPSHOT Viewer</property>
+  </module>
+</configuration>

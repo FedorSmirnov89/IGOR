@@ -1,0 +1,7 @@
+*~
+coverage.xml
+/.idea/
+/.scannerwork/
+.coverage
+*.pyc
+
