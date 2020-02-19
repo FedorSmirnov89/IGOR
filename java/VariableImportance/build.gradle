@@ -39,8 +39,8 @@ repositories {
 
 dependencies {
 	// opt frameworks
-	implementation 'com.github.felixreimann:opt4j:v3.2'
-	implementation 'com.github.FedorSmirnov89:opendse:a3677b9bb8'
+	implementation 'com.github.FedorSmirnov89:opt4j:-SNAPSHOT'
+	implementation 'com.github.FedorSmirnov89:opendse:-SNAPSHOT'
 	// http communication
 	compile group: 'org.apache.httpcomponents', name:'httpclient', version: '4.5.3'
 	compile group: 'org.apache.httpcomponents', name:'httpasyncclient', version: '4.1.3'
