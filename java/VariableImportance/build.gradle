@@ -4,7 +4,7 @@ buildscript {
 		jcenter()
 	}
 	dependencies {
-		classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
+		classpath 'com.github.jengelman.gradle.plugins:shadow:4.0.2'
 	}
 }
 
@@ -27,7 +27,7 @@ mainClassName = 'org.opt4j.core.start.Opt4J'
 group 'importance'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 11
 
 repositories {
 	maven {
