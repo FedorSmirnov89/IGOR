@@ -1,5 +1,6 @@
 package optimization;
 
+import org.opt4j.satdecoding.SatSolvingListener;
 import org.opt4j.satdecoding.Solver;
 
 import blueprint.BluePrintClassContainer;
@@ -41,6 +42,18 @@ public class VariableOrderManagerSync extends VariableOrderManagerAbstract {
 		// empty the set for the solving samples
 		curSampleBatch.clear();
 		return serverResponse;
+	}
+
+	@Override
+	public boolean registerSolvingListener(SatSolvingListener listener) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean unregisterSolvingListener(SatSolvingListener listener) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

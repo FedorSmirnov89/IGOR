@@ -8,6 +8,7 @@ import org.apache.http.concurrent.FutureCallback;
 import org.opt4j.core.optimizer.Optimizer;
 import org.opt4j.core.optimizer.OptimizerStateListener;
 import org.opt4j.core.start.Constant;
+import org.opt4j.satdecoding.SatSolvingListener;
 import org.opt4j.satdecoding.Solver;
 
 import com.google.gson.Gson;
@@ -54,9 +55,11 @@ public class VariableOrderManagerAsync extends VariableOrderManagerAbstract impl
 	protected final double importanceThreshold;
 	protected final boolean importanceMemory;
 	protected final String summaryParam;
+	protected final String calcParam;
 	protected static final String IMPORTANCE_THRESHOLD_PARAMETER_STRING = "importance_threshold";
 	protected static final String IMPORTANCE_MEMORY_PARAMETER_STRING = "importance_memory";
 	protected static final String IMPORTANCE_SUMMARY_PARAMETER_STRING = "importance_summary";
+	protected static final String IMPORTANCE_CALCULATION_PARAMETER_STRING = "importance_calc";
 	protected final RequestHandlerInit requestHandlerInit;
 	protected final RequestHandlerShutDown requestHandlerShutDown;
 
@@ -68,6 +71,7 @@ public class VariableOrderManagerAsync extends VariableOrderManagerAbstract impl
 			@Constant(value = "importanceThreshold", namespace = VariableOrderManagerAbstract.class) double importanceThreshold,
 			@Constant(value = "importanceMemory", namespace = VariableOrderManagerAbstract.class) boolean importanceMemory,
 			@Constant(value = "importanceSummary", namespace = VarOrderDynamicModule.class) String summaryParam,
+			@Constant(value = "importanceCalculation", namespace = VarOrderDynamicModule.class) String calcParam,
 			Solver solver, ImportanceUpdate importanceUpdate, ModelMemory modelMemory) {
 		super(bluePrintContainer, communicationContainer, maxNumSolvingSamples, iterationInterval, solver,
 				importanceUpdate, modelMemory);
@@ -76,6 +80,7 @@ public class VariableOrderManagerAsync extends VariableOrderManagerAbstract impl
 		this.requestHandlerInit = communicationContainer.getRequestHandlerInit();
 		this.requestHandlerShutDown = communicationContainer.getRequestHandlerShutDown();
 		this.summaryParam = summaryParam;
+		this.calcParam = calcParam;
 		this.callback = new FutureCallback<Content>() {
 			@Override
 			public void completed(Content result) {
@@ -131,6 +136,7 @@ public class VariableOrderManagerAsync extends VariableOrderManagerAbstract impl
 		commandParameters.put(IMPORTANCE_THRESHOLD_PARAMETER_STRING, importanceThreshold);
 		commandParameters.put(IMPORTANCE_MEMORY_PARAMETER_STRING, importanceMemory);
 		commandParameters.put(IMPORTANCE_SUMMARY_PARAMETER_STRING, summaryParam);
+		commandParameters.put(IMPORTANCE_CALCULATION_PARAMETER_STRING, calcParam);
 		Command initCommand = new Command(commandParameters);
 		Gson gson = new Gson();
 		String jsonString = gson.toJson(initCommand);
@@ -147,5 +153,17 @@ public class VariableOrderManagerAsync extends VariableOrderManagerAbstract impl
 	public void optimizationStopped(Optimizer optimizer) {
 		// close the communication threads
 		requestHandler.shutDown();
+	}
+
+	@Override
+	public boolean registerSolvingListener(SatSolvingListener listener) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean unregisterSolvingListener(SatSolvingListener listener) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

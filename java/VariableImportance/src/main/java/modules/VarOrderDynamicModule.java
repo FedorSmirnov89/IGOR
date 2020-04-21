@@ -36,6 +36,8 @@ public class VarOrderDynamicModule extends DesignSpaceExplorationModule {
 	@Constant(value = "pathToPythonDir", namespace = VariableOrderManagerAbstract.class)
 	protected String pathToPythonDirectory = "";
 
+	protected CalcTypes calcType = CalcTypes.ROOT;
+
 	protected GenotypeType genotypeType = GenotypeType.MIXED;
 
 	protected ImportanceSummary importanceSummary = ImportanceSummary.AVG;
@@ -44,9 +46,33 @@ public class VarOrderDynamicModule extends DesignSpaceExplorationModule {
 		IMPORTANT_ONLY, MIXED
 	}
 
+	/**
+	 * Enum for the different ways to calculate the importance.
+	 * 
+	 * @author fedor
+	 *
+	 *         ROOT: importance of each var according to InfGain when used as root
+	 *         of tree TREE_POS: importance of each var according to InfGain in its
+	 *         postion in best tree
+	 *
+	 */
+	public enum CalcTypes {
+		ROOT, TREE_POS
+	}
+
+	public CalcTypes getCalcType() {
+		return calcType;
+	}
+
+	public void setCalcType(CalcTypes calcType) {
+		this.calcType = calcType;
+	}
+
 	public enum ImportanceSummary {
 		AVG("avg"), MAX("max");
+
 		protected final String paramName;
+
 		private ImportanceSummary(String string) {
 			this.paramName = string;
 		}
@@ -117,6 +143,7 @@ public class VarOrderDynamicModule extends DesignSpaceExplorationModule {
 		addOptimizerStateListener(VariableOrderManagerAsync.class);
 		bind(SequentialIndividualCompleter.class).to(SequentialIndividualCompleterTimeOut.class);
 		bindConstant("importanceSummary", VarOrderDynamicModule.class).to(importanceSummary.paramName);
+		bindConstant("importanceCalculation", VarOrderDynamicModule.class).to(calcType.name());
 		if (genotypeType.equals(GenotypeType.MIXED)) {
 			bind(BluePrintGeneratorAbstract.class).to(BluePrintGeneratorMixed.class);
 		} else {

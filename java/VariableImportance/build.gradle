@@ -38,8 +38,9 @@ repositories {
 }
 
 dependencies {
-	// opt frameworks
+	// dependency to Opt4J
 	implementation 'com.github.FedorSmirnov89:opt4j:-SNAPSHOT'
+	// dependency to opendse
 	implementation 'com.github.FedorSmirnov89:opendse:-SNAPSHOT'
 	// http communication
 	compile group: 'org.apache.httpcomponents', name:'httpclient', version: '4.5.3'

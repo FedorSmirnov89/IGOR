@@ -179,7 +179,7 @@ public abstract class VariableOrderManagerAbstract implements IndividualStateLis
 	 *            the evaluated individual
 	 */
 	@Override
-	public void inidividualStateChanged(Individual individual) {
+	public void individualStateChanged(Individual individual) {
 		if (individual.getState().equals(State.EVALUATED) && individual.getPhenotype() != null) {
 			if (curSampleBatch.size() < maxNumberSolvingSamples) {
 				LabeledSample sample = sampleFactory.createLabeledSample(individual);

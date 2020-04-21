@@ -5,7 +5,7 @@ import org.apache.http.concurrent.FutureCallback;
 
 /**
  * Interface for classes handling the communication with the Python server,
- * i.e., sending requests and receiving teh response.
+ * i.e., sending requests and receiving the response.
  * 
  * @author Fedor Smirnov
  *

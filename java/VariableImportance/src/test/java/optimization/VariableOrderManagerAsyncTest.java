@@ -65,7 +65,7 @@ public class VariableOrderManagerAsyncTest {
 	@Test
 	public void testNextIterationNewInformation() {
 		VariableOrderManagerAsync tested = spy(new VariableOrderManagerAsync(bluePrintContainer, communicationContainer,
-				100, 2, .001, true, "avg", solver, importanceUpdate, modelMemory));
+				100, 2, .001, true, "avg", "ROOT", solver, importanceUpdate, modelMemory));
 		tested.currentState = OrderManagerState.NEW_INFORMATION;
 		tested.lastServerResponse = "last";
 		tested.iterationComplete(1);
@@ -77,7 +77,7 @@ public class VariableOrderManagerAsyncTest {
 	public void testNextIterationReady() {
 		when(commParser.makeServerRequestString(any())).thenReturn("request");
 		VariableOrderManagerAsync tested = new VariableOrderManagerAsync(bluePrintContainer, communicationContainer,
-				100, 2, .001, true, "avg", solver, importanceUpdate, modelMemory);
+				100, 2, .001, true, "avg", "ROOT", solver, importanceUpdate, modelMemory);
 		tested.iterationComplete(1);
 		assertEquals(1, tested.currentIteration);
 		assertEquals(OrderManagerState.READY, tested.currentState);
@@ -90,7 +90,7 @@ public class VariableOrderManagerAsyncTest {
 	@Test
 	public void testCompletedRequest() {
 		VariableOrderManagerAsync tested = new VariableOrderManagerAsync(bluePrintContainer, communicationContainer,
-				100, 1, .001, true, "avg", solver, importanceUpdate, modelMemory);
+				100, 1, .001, true, "avg", "ROOT", solver, importanceUpdate, modelMemory);
 		assertNull(tested.lastServerResponse);
 		assertEquals(OrderManagerState.READY, tested.currentState);
 		Content mockContent = mock(Content.class);
@@ -104,7 +104,7 @@ public class VariableOrderManagerAsyncTest {
 	@Test(expected = IllegalStateException.class)
 	public void testCompletedRequestWrongState() {
 		VariableOrderManagerAsync tested = new VariableOrderManagerAsync(bluePrintContainer, communicationContainer,
-				100, 1, .001, true, "avg", solver, importanceUpdate, modelMemory);
+				100, 1, .001, true, "avg", "ROOT", solver, importanceUpdate, modelMemory);
 		Content mockContent = mock(Content.class);
 		tested.callback.completed(mockContent);
 	}
@@ -112,14 +112,14 @@ public class VariableOrderManagerAsyncTest {
 	@Test(expected = IllegalStateException.class)
 	public void testCancelledRequest() {
 		VariableOrderManagerAsync tested = new VariableOrderManagerAsync(bluePrintContainer, communicationContainer,
-				100, 1, .001, true, "avg", solver, importanceUpdate, modelMemory);
+				100, 1, .001, true, "avg", "ROOT", solver, importanceUpdate, modelMemory);
 		tested.callback.cancelled();
 	}
 
 	@Test(expected = IllegalStateException.class)
 	public void testFailedRequest() {
 		VariableOrderManagerAsync tested = new VariableOrderManagerAsync(bluePrintContainer, communicationContainer,
-				100, 1, .001, true, "avg", solver, importanceUpdate, modelMemory);
+				100, 1, .001, true, "avg", "ROOT", solver, importanceUpdate, modelMemory);
 		tested.callback.failed(new Exception());
 	}
 }
