@@ -8,6 +8,7 @@ import org.opt4j.core.Individual;
 import org.opt4j.core.Individual.State;
 import org.opt4j.core.Objective;
 import org.opt4j.core.Objectives;
+import org.opt4j.core.ObjectivesWrapper;
 import org.opt4j.core.optimizer.Control;
 import org.opt4j.core.optimizer.TerminationException;
 import org.opt4j.core.problem.Decoder;
@@ -32,8 +33,9 @@ public class SequentialIndividualCompleterTimeOutTest {
 		Decoder<Genotype, Object> decoderMock = mock(Decoder.class);
 		@SuppressWarnings("unchecked")
 		Evaluator<Object> evaluatorMock = mock(Evaluator.class);
+		ObjectivesWrapper mockWrapper = mock(ObjectivesWrapper.class);
 		SequentialIndividualCompleterTimeOut tested = new SequentialIndividualCompleterTimeOut(controlMock, decoderMock,
-				evaluatorMock);
+				evaluatorMock, mockWrapper);
 		assertFalse(tested.objectivesKnown());
 		tested.optimizationObjectives.add(mock(Objective.class));
 		assertTrue(tested.objectivesKnown());
@@ -45,8 +47,9 @@ public class SequentialIndividualCompleterTimeOutTest {
 		Control controlMock = mock(Control.class);
 		Decoder<Genotype, Object> decoderMock = mock(Decoder.class);
 		Evaluator<Object> evaluatorMock = mock(Evaluator.class);
+		ObjectivesWrapper mockWrapper = mock(ObjectivesWrapper.class);
 		SequentialIndividualCompleterTimeOut tested = new SequentialIndividualCompleterTimeOut(controlMock, decoderMock,
-				evaluatorMock);
+				evaluatorMock, mockWrapper);
 		Objective first = new Objective("first");
 		Objective second = new Objective("second");
 		tested.optimizationObjectives.add(first);
@@ -77,8 +80,9 @@ public class SequentialIndividualCompleterTimeOutTest {
 		Decoder<Genotype, Object> decoderMock = mock(Decoder.class);
 		@SuppressWarnings("unchecked")
 		Evaluator<Object> evaluatorMock = mock(Evaluator.class);
+		ObjectivesWrapper mockWrapper = mock(ObjectivesWrapper.class);
 		SequentialIndividualCompleterTimeOut tested = new SequentialIndividualCompleterTimeOut(controlMock, decoderMock,
-				evaluatorMock);
+				evaluatorMock, mockWrapper);
 		Set<Individual> iterable = new HashSet<>();
 		Individual indi = new mockIndi();
 		indi.setState(State.GENOTYPED);

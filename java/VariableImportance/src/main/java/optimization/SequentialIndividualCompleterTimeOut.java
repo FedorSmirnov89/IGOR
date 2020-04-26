@@ -8,6 +8,7 @@ import org.opt4j.core.Individual;
 import org.opt4j.core.Individual.State;
 import org.opt4j.core.Objective;
 import org.opt4j.core.Objectives;
+import org.opt4j.core.ObjectivesWrapper;
 import org.opt4j.core.common.completer.SequentialIndividualCompleter;
 import org.opt4j.core.optimizer.Control;
 import org.opt4j.core.optimizer.TerminationException;
@@ -43,8 +44,8 @@ public class SequentialIndividualCompleterTimeOut extends SequentialIndividualCo
 
 	@Inject
 	public SequentialIndividualCompleterTimeOut(Control control, Decoder<Genotype, Object> decoder,
-			Evaluator<Object> evaluator) {
-		super(control, decoder, evaluator);
+			Evaluator<Object> evaluator, ObjectivesWrapper objWrapper) {
+		super(control, decoder, evaluator, objWrapper);
 	}
 
 	@Override
